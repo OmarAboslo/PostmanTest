@@ -1,0 +1,16 @@
+stages:
+-api_test
+
+.apitest:
+  variables:
+     POSTMAN_COLLECTION: https://api.getpostman.com/collections/18524986-d14045e1-5a1c-4258-ac7c-69a6e1e02bd3?apikey=PMAK-61d49e1a028f023456d26c24-beacc3f707a7fdd92d78e2597f291566d8
+     POSTMAN_ENVIRONMENT: https://api.getpostman.com/environments/18524986-0ab175ef-2b34-41fd-a681-639c2374e774?apikey=PMAK-61d49e1a028f023456d26c24-beacc3f707a7fdd92d78e2597f291566d8
+api_test:
+  image: 
+    name: postman/newman:latest
+    entrypoint: [""]
+  stage: api_test
+  needs: []
+  extends: .apitest
+  script:
+    - newman run ${POSTMAN_COLLECTION} -e ${POSTMAN_ENVIRONMENT}
